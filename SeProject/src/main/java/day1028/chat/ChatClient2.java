@@ -1,4 +1,4 @@
-package day1027.gui;
+package day1028.chat;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,16 +13,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class ChatClient extends JFrame implements KeyListener{
+public class ChatClient2 extends JFrame implements KeyListener{
 											// 	 is a							is a
 		JTextArea area;
 		JScrollPane scroll;
 		JPanel p_south;
 		JTextField t_input;
 		JButton bt;
-		
-		public ChatClient() {		
+		ChatClient ch;
+		public ChatClient2(ChatClient ch) {		
 			//생성
+			this.ch=ch;
 			area = new JTextArea();
 			scroll= new JScrollPane(area);
 			p_south=new JPanel();
@@ -37,7 +38,7 @@ public class ChatClient extends JFrame implements KeyListener{
 			add(p_south,BorderLayout.SOUTH);//남쪽에 패널부착
 			
 			//스타일 적용
-			area.setBackground(Color.YELLOW);
+			area.setBackground(Color.GREEN);
 			t_input.setBackground(Color.blue);
 			t_input.setForeground(Color.WHITE);
 			bt.setBackground(Color.BLACK);
@@ -46,9 +47,10 @@ public class ChatClient extends JFrame implements KeyListener{
 			t_input.setPreferredSize(new Dimension(285,30));
 			
 			//보여주기 전에 미리 연결하자(컴포넌트와 리스너 연결)
-			bt.addActionListener(new MyActionListener(bt,t_input,area));
 			t_input.addKeyListener(this);
-			setSize(300,400);
+			
+			//setSize(300,400);
+			setBounds(500, 150, 300, 400);
 			setVisible(true);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
@@ -62,15 +64,19 @@ public class ChatClient extends JFrame implements KeyListener{
 			//엔터키를 누르면, area에 입력데이터를 반영하자.
 			int key= e.getKeyCode();//Key 코드값 반환
 			if(key==10) {
-				String msg= t_input.getText();
-				area.append(msg+"\n");
-				t_input.setText("");//빈텍스트로 초기화
+				send();
 			}
 		}
 		
-		public static void main(String[] args) {
-			new ChatClient();
-		}
-		
+		public void send() {
+			//나에 대한 처리
+			String msg= t_input.getText();
+			area.append(msg+"\n");
+			t_input.setText("");//빈텍스트로 초기화
+			
+			//너에 대한 처리
+			ch.area.append(msg+"\n");
+			ch.t_input.setText("");//빈텍스트로 초기화
+		}			
 		
 }
