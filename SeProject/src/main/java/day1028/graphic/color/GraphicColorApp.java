@@ -9,75 +9,34 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GraphicColorApp extends JFrame implements ActionListener{	
-	JPanel container;
-	ColorPanel p;
-	JPanel red_box;
-	JPanel orange_box;
-	JPanel yellow_box;
-	JPanel green_box;
-	JPanel blue_box;
-	JPanel deepBlue_box;
-	JPanel puple_box;
+public class GraphicColorApp extends JFrame{	
+	JPanel p_north;
+	JPanel p_center;
+	ThumbPanel[] thumb = new ThumbPanel[7];
+	//7가지 색상을 배열로 보유하자(반복문마다 틀린 색을 사용해야 하기 때문)
+	Color[] colorArray= {
+			Color.RED,Color.ORANGE,Color.YELLOW,Color.green,Color.blue,Color.cyan,Color.pink
+	};
 	
 	public GraphicColorApp() {
 		//생성
-		container = new JPanel();
-		p=new ColorPanel();
-		red_box = new JPanel();
-		orange_box = new JPanel();
-		yellow_box = new JPanel();
-		green_box = new JPanel();
-		blue_box = new JPanel();
-		deepBlue_box = new JPanel();
-		puple_box = new JPanel();
+		p_north=new JPanel();
+		p_center = new JPanel();
 		
-		//스타일
-		red_box.setBackground(Color.red);
-		red_box.setPreferredSize(new Dimension(100,100));
-		orange_box.setBackground(Color.orange);
-		orange_box.setPreferredSize(new Dimension(100,100));
-		yellow_box.setBackground(Color.yellow);
-		yellow_box.setPreferredSize(new Dimension(100,100));
-		green_box.setBackground(Color.green);
-		green_box.setPreferredSize(new Dimension(100,100));
-		blue_box.setBackground(Color.CYAN);
-		blue_box.setPreferredSize(new Dimension(100,100));
-		deepBlue_box.setBackground(Color.blue);
-		deepBlue_box.setPreferredSize(new Dimension(100,100));
-		puple_box.setBackground(Color.magenta);
-		puple_box.setPreferredSize(new Dimension(100,100));
+		for(int i=0; i<thumb.length; i++) {
+			thumb[i]= new ThumbPanel(p_center,colorArray[i]);
+			p_north.add(thumb[i]);
+		}
+		p_center.setBackground(Color.white);
 		
-		//조립
-		container.add(red_box);
-		container.add(orange_box);
-		container.add(yellow_box);
-		container.add(green_box);
-		container.add(blue_box);
-		container.add(deepBlue_box);
-		container.add(puple_box);
-				
-		add(container,BorderLayout.NORTH);
-		add(p,BorderLayout.CENTER);
-				
+		add(p_north, BorderLayout.NORTH);
+		add(p_center);
 		
-		setSize(700, 600);
+		setSize(700, 500);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	
-	public void actionPerformed(ActionEvent e) {
-		Object obj = e.getSource();
-		if(obj==red_box) p.bg=Color.red;
-		else if(obj==orange_box) p.bg=Color.orange;
-		else if(obj==yellow_box) p.bg=Color.yellow;
-		else if(obj==green_box) p.bg=Color.green;
-		else if(obj==blue_box) p.bg=Color.cyan;
-		else if(obj==deepBlue_box) p.bg=Color.blue;
-		else if(obj==puple_box) p.bg=Color.magenta;
 		
-		p.repaint();
-	}
 	
 	public static void main(String[] args) {
 		new GraphicColorApp();
