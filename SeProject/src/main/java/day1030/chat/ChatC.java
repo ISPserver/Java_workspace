@@ -1,4 +1,4 @@
-package day1028.chat;
+package day1030.chat;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import day1028.chat.ChatClient2;
-public class ChatClient extends JFrame implements KeyListener, ActionListener{
+public class ChatC extends JFrame implements KeyListener, ActionListener{
 											// 	 is a							is a
 		JTextArea area;
 		JScrollPane scroll;
@@ -24,10 +24,11 @@ public class ChatClient extends JFrame implements KeyListener, ActionListener{
 		JTextField t_input;
 		JButton bt;
 		JButton bt_open; //대화상대방을 띄우는 버튼
-		ChatClient2 ch2;
-		static ChatClient3 ch3;
+		private ChatA chatA;
+		private ChatB chatB;
 		
-		public ChatClient() {		
+		
+		public ChatC() {		
 			//생성
 			super("부모");
 			area = new JTextArea();
@@ -62,8 +63,8 @@ public class ChatClient extends JFrame implements KeyListener, ActionListener{
 			//open버튼에 리스너 연결
 			bt_open.addActionListener(this);
 			
-			//setSize(300,400);
-			setBounds(200, 150, 300, 400);
+
+			setBounds(500, 550, 300, 400);
 			setVisible(true);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
@@ -100,24 +101,24 @@ public class ChatClient extends JFrame implements KeyListener, ActionListener{
 			area.append(msg+"\n");
 			t_input.setText("");//빈텍스트로 초기화
 			
-			//ch2에 대한 채팅 처리						
-			ch2.area.append(msg+"\n");	
-			ch2.t_input.setText("");//빈텍스트로 초기화
-			
-			//ch3에 대한 채팅 처리						
-			ch3.area.append(msg+"\n");	
-			ch3.t_input.setText("");//빈텍스트로 초기화
+			//chatA에 대한 채팅 처리						
+			chatA.area.append(msg+"\n");						
+			//chatB에 대한 채팅 처리						
+			chatB.area.append(msg+"\n");
 		}
 		//대화할 상대방 윈도우 창 띄우기
 		public void open() {
 			//ChatClient2를 화면에 띄우기
-			ch2 = new ChatClient2(this,ch3);
-			ch3= new ChatClient3(this,ch2);
+			
 		}
 		
-		public static void main(String[] args) {
-			new ChatClient();
+		//세터추가
+		public void setChatA(ChatA chatA) {
+			this.chatA = chatA;
 		}
 		
-		
+		public void setChatB(ChatB chatB) {
+			this.chatB = chatB;
+		}
+							
 }

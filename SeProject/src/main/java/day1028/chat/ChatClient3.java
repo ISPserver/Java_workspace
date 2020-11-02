@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class ChatClient2 extends JFrame implements KeyListener{
+public class ChatClient3 extends JFrame implements KeyListener{
 											// 	 is a							is a
 		JTextArea area;
 		JScrollPane scroll;
@@ -21,13 +21,14 @@ public class ChatClient2 extends JFrame implements KeyListener{
 		JTextField t_input;
 		JButton bt;
 		ChatClient ch;
-		public static ChatClient3 ch3;		
-		
-		public ChatClient2(ChatClient ch, ChatClient3 ch3) {			
-			//생성			
-			this.ch=ch;
-			this.ch3=ch3;
+		static ChatClient2 ch2;
+		public ChatClient3() {
 			
+		}
+		public ChatClient3(ChatClient ch,ChatClient2 ch2) {		
+			//생성
+			this.ch=ch;
+			this.ch2=ch2;
 			area = new JTextArea();
 			scroll= new JScrollPane(area);
 			p_south=new JPanel();
@@ -82,11 +83,9 @@ public class ChatClient2 extends JFrame implements KeyListener{
 			ch.area.append(msg+"\n");
 			ch.t_input.setText("");//빈텍스트로 초기화
 			
-			//ch3에 대한 처리
-			ch3.area.append(msg+"\n");
-			ch3.t_input.setText("");//빈텍스트로 초기화
+			//ch2에 대한 처리
+			ch2.area.append(msg+"\n");
+			ch2.t_input.setText("");//빈텍스트로 초기화
 		}			
-		public static void main(String[] args) {
-			
-		}
+		
 }
