@@ -16,10 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-class foo{
-	static void a() { }
-	void beta() { }
-}
 public class TestApp extends JFrame{
 	Canvas can;
 	JButton bt;
@@ -58,7 +54,7 @@ public class TestApp extends JFrame{
 			}
 		});
 		
-		//내부익명클래스는 지연변수가 final로 된것만 접근 가능
+		//내부익명클래스는 지역변수가 final로 된것만 접근 가능
 		final int x=0;
 		
 		bt.addActionListener(new ActionListener() {			
@@ -72,8 +68,7 @@ public class TestApp extends JFrame{
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
-		});
-		
+		});		
 		
 		can.setPreferredSize(new Dimension(300,300));
 		setSize(400,400);

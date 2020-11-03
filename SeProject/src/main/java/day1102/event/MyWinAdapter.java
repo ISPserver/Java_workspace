@@ -17,4 +17,5 @@ public class MyWinAdapter extends WindowAdapter{
 		System.out.println("windowClosing");	
 		System.exit(0);//프로세스 종료
 	}
+
 }

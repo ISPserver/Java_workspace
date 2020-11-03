@@ -16,7 +16,7 @@ public class IconApp extends JFrame{
 	
 	public IconApp() {
 		//OS에 의존적인 경로를 사용하지 말고, 클래스패스를 기준으로 한 경로로 자원을 이용
-		URL url = this.getClass().getClassLoader().getResource("res/youtube.png");
+		URL url = this.getClass().getClassLoader().getResource("res/youtube.png");		
 		icon = new ImageIcon(url);
 		bt = new JButton(icon);
 		
