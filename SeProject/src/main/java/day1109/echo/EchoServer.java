@@ -31,6 +31,7 @@ public class EchoServer {
          //들어오는 것이므로 입력스트림으로 처리해야 한다.
          //소켓으로부터 스트림을 뽑아낼 수 있다.
          InputStream is = socket.getInputStream(); //바이트기반의 입력스트림(한글깨짐)
+         
          int data;
          while(true) {        	
 	         data = is.read(); //1byte 읽어들임

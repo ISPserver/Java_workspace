@@ -81,7 +81,7 @@ public class ShoppingApp extends JFrame{
 	Connection con;//접속 성공이 되면, 그 정보를 가진 인터페이스
 	HashMap<String, Integer> map=new HashMap<String, Integer>(); //컬렉션 프레임웍 중,  key -value 의 쌍으로 객체를 관리해주는 객체
 	HashMap<String, Integer> map2=new HashMap<String, Integer>(); //컬렉션 프레임웍 중,  key -value 의 쌍으로 객체를 관리해주는 객체
-	
+		
 	JFileChooser chooser=new JFileChooser("C:/Users/tjdal/workspace/java_workspace/SeProject/res/travel2");
 	Toolkit kit=Toolkit.getDefaultToolkit();//플랫폼 종속적인 경로로 가져올때는 툴킷 쓰자
 	File file;
@@ -270,7 +270,7 @@ public class ShoppingApp extends JFrame{
 		//이미지 인터넷으로 수집하기 버튼과 연결 
 		bt_collect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				collectorFrame = new CollectorFrame(ShoppingApp.this); //내부익명에서 외부클래스 인스턴스 접근시
+				collectorFrame = new CollectorFrame(ShoppingApp.this); // 내부익명에서 외부클래스 인스턴스 접근시
 			}
 		});
 		
@@ -326,7 +326,8 @@ public class ShoppingApp extends JFrame{
 			}else {
 				//윈도우 창에 유저명으로 접속했다는 메시지!!
 				this.setTitle(user+"로 접속 중");
-			}
+			}					
+			
 			
 		} catch (ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(this,"드라이버를 찾을 수 없습니다");
