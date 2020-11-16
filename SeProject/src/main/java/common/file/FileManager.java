@@ -14,6 +14,16 @@ public class FileManager {
 		return str[1];//두번째 칸이 확장자임
 	}
 	
+	public static String getExtend2(String filename) {
+		int lastIndex = filename.lastIndexOf(".");
+		//마지막점 다음 문자부터 가져와야 하므로 +1		
+		return filename.substring(lastIndex+1,filename.length());
+	}
+	
+	public static void main(String[] args) {
+		String filename = getFilename("https://images-na.ssl-images-amazon.com/images/I/91qvAndeVYL._RI_.jpg");
+		
+	}
 	/*
 	public static void main(String[] args) {
 		String filename = getFilename("http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/20/7/4/9/1/8/3/FmIzU/2003749183_B.jpg");
