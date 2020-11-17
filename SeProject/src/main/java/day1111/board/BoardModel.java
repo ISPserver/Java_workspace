@@ -21,11 +21,13 @@ public class BoardModel extends AbstractTableModel{
 	public int getColumnCount() { //컬럼 수
 		return column.length;
 	}
+	
 	//컬럼제목을 출력하기 위해선, 이미 지원하는 메서드 오버라이드
 	@Override
 	public String getColumnName(int col) {		
 		return column[col];
 	}
+	
 	//해당 좌표의 데이터
 	@Override
 	public Object getValueAt(int row, int col) {
