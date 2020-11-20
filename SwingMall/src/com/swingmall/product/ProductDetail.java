@@ -7,14 +7,15 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.swingmall.admin.product.ProductVO;
+import com.swingmall.cart.Cart;
+import com.swingmall.cart.CartVO;
 import com.swingmall.main.Page;
 import com.swingmall.main.ShopMain;
 
@@ -80,9 +81,9 @@ public class ProductDetail extends Page{
       ch_size.setPreferredSize(d);
       
       
-      la_brand.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
-      la_product_name.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
-      la_price.setFont(new Font("Comic Sans MS", Font.PLAIN, 25));
+      la_brand.setFont(new Font("Verdana", Font.ITALIC, 40));
+      la_product_name.setFont(new Font("Verdana", Font.ITALIC, 25));
+      la_price.setFont(new Font("Verdana", Font.ITALIC, 25));
       bt_buy.setBackground(new Color(192, 228, 241));
       bt_cart.setBackground(new Color(172, 208, 192));
       //조립
@@ -101,17 +102,48 @@ public class ProductDetail extends Page{
       
       add(p_content);
       
-      
+      //장바구니 페이지 열기
+      bt_cart.addActionListener((e)-> {
+    	  registCart();//장바구니 등록
+    	  
+    	  //장바구니에 정보가 담겼다고 알려주고, 장바구니 이동 여부 확인해야함
+    	  int ans = JOptionPane.showConfirmDialog(ProductDetail.this, "장바구니에 상품이 담겼습니다.\n장바구니로 이동하시겠어요?");
+    	  
+    	  if(ans==JOptionPane.OK_OPTION) {
+    		  getShopMain().showPage(ShopMain.CART);    		  
+    	  }
+      });
    }
    
    //상세페이지가 보여질때 데이터를 채워넣는 메서드 ( 생성자에서 하면 디자인 처리에 타이밍적인 제한이 많다 )
    public void init(ProductVO vo,Image img) {
-      la_brand.setText(vo.getBrand());
-      la_product_name.setText(vo.getProduct_name());
-      la_price.setText(Integer.toString(vo.getPrice()));
-      this.img = img;
-      this.img =this.img.getScaledInstance(400, 350, Image.SCALE_SMOOTH);
+	   this.vo=vo;//멤버변수에 현재 보고있는 상품 vo 주입	   
+	   la_brand.setText(vo.getBrand());
+	   la_product_name.setText(vo.getProduct_name());
+	   la_price.setText(Integer.toString(vo.getPrice()));
+	   this.img = img;
+	   this.img =this.img.getScaledInstance(400, 350, Image.SCALE_SMOOTH);
       
+   }
+   
+   //장바구니에 등록(DB로 보관되지 않고, 오직 메모리상으로 지정할 예정)
+   public void registCart() {
+	   Cart cartPage = (Cart)getShopMain().getPage()[ShopMain.CART];//장바구니 페이지에 접근
+	   
+	   CartVO cartVO = new CartVO();//Empty Vo생성
+	   cartVO.setProduct_id(vo.getProduct_id());//현재 보고있는 상품 이용해 CartVO에 채우기
+	   cartVO.setBrand(vo.getBrand());
+	   cartVO.setProduct_name(vo.getProduct_name());
+	   cartVO.setPrice(vo.getPrice());
+	   cartVO.setFilename(vo.getFilename());
+	   cartVO.setDetail(vo.getDetail());
+	   cartVO.setEa(1);//장바구니에 담을때는 기본이 1개임
+	   //선택한 색상
+	   cartVO.setColor(ch_color.getSelectedItem());
+	   //선택한 사이즈
+	   cartVO.setSize(ch_size.getSelectedItem());
+	   cartPage.addCart(cartVO);//장바구니에 상품 1건 추가하기
+	   cartPage.getCartList();//장바구니 목록 구성
    }
    
    public ProductVO getVo() {
